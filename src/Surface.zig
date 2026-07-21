@@ -1658,6 +1658,9 @@ fn mouseRefreshLinks(
     // No link, if we're previously over a link then we need to clear
     // the over-link apprt state.
     if (over_link) {
+        // Mark dirty so the now-unhovered link's underline is cleared on redraw.
+        self.renderer_state.terminal.screens.active.dirty.hyperlink_hover = true;
+
         _ = try self.rt_app.performAction(
             .{ .surface = self },
             .mouse_shape,
